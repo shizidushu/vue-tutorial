@@ -35,9 +35,11 @@
                   <a :href="item.url">{{ item.text }}</a>
                 </v-list-item-content>
               </v-list-item>
+            </v-list>
 
-              <v-divider></v-divider>
-              <v-subheader>Vuetify</v-subheader>
+            <v-divider></v-divider>
+            <v-subheader>Vuetify</v-subheader>
+            <v-list>
               <v-list-item v-for="(item, i) in items2" :key="i">
                 <v-list-item-content>
                   <a :href="item.url">{{ item.text }}</a>
@@ -60,7 +62,7 @@
         el: "#app",
         vuetify: new Vuetify(),
         data: () => ({
-          items: [{ text: "Hello World", url: "./vue/hello-world.html" }],
+          items: [{ text: "介绍", url: "./vue/introduction.html" }],
           items2: [{ text: "Application", url: "./vuetify/application.html" }],
         }),
       });

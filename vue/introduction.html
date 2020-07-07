@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script
+      src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+  </head>
+  <body>
+    <div id="app">
+      <h2>声明式渲染</h2>
+      {{ message }}
+
+      <hr />
+
+      <span v-bind:title="message2">
+        鼠标悬停几秒钟查看此处动态绑定的提示信息！
+      </span>
+
+      <hr />
+
+      <h2>条件与循环</h2>
+
+      <p v-if="seen">现在你可以看到我，3秒后就看不到了</p>
+
+      <hr />
+
+      <ol>
+        <li v-for="todo in todos">
+          {{ todo.text }}
+        </li>
+      </ol>
+
+      <hr />
+
+      <h2>处理用户输入</h2>
+      <p>{{ message }}</p>
+      <button v-on:click="reverseMessage">反转消息</button>
+
+      <hr />
+
+      <h2>v-model指令</h2>
+      <p>{{ message }}</p>
+      <input v-model="message" />
+
+      <hr />
+
+      <h2>v-model指令本质上是语法糖</h2>
+      <p>它负责监听用户的输入事件以更新数据，并对一些极端场景进行一些特殊处理。</p>
+      <p>&lt;input type="text" v-bind:value="message" v-on:input="message = $event.target.value"&gt;</p>
+      <p>
+        $event是一个特殊变量。可以在内联语句处理器中访问原始的 DOM 事件
+      </p>
+
+      <p>{{ message }}</p>
+
+      <input type="text" v-bind:value="message" v-on:input="message = $event.target.value">
+
+    </div>
+
+    <script type="text/javascript">
+      var app = new Vue({
+        el: "#app",
+        data: {
+          message: "Hello Vue!",
+          message2: "页面加载于 " + new Date().toLocaleString(),
+          seen: true,
+          todos: [
+            { text: "学习 JavaScript" },
+            { text: "学习 Vue" },
+            { text: "整个牛项目" },
+          ],
+        },
+        methods: {
+          reverseMessage: function () {
+            this.message = this.message.split("").reverse().join("");
+          },
+        },
+      });
+    </script>
+    <script>
+      window.onload = function () {
+        setTimeout(function () {
+          var el = document.getElementById("app");
+          var vm = el.__vue__;
+          vm.seen = false;
+
+          vm.todos.push({ text: "新项目" });
+        }, 3000);
+      };
+    </script>
+  </body>
+</html>
