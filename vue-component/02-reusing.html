@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="app">
+    <p>组件：组件的重复使用</p>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+</div>
+<script type="text/javascript">
+// 组件是可复用的 Vue 实例，且带有一个名字
+// 与 new Vue 接收相同的选项（根实例的特有选项除外，如el）
+Vue.component('button-counter', {
+    // data必须是一个函数
+	data: function () {
+		return {
+		  count: 0
+		}
+	},
+	template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+})
+var vm = new Vue({
+	el : "#app",
+	data : {},
+});
+</script>
+<style type="text/css">
+
+</style>
+</body>
+</html>

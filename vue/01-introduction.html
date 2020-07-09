@@ -79,9 +79,18 @@
             this.message = this.message.split("").reverse().join("");
           },
         },
+        mounted: function() {
+          setTimeout(function () {
+          var el = document.getElementById("app");
+          var vm = el.__vue__;
+          vm.seen = false;
+
+          vm.todos.push({ text: "新项目" });
+        }, 3000);
+        }
       });
     </script>
-    <script>
+    <!-- <script>
       window.onload = function () {
         setTimeout(function () {
           var el = document.getElementById("app");
@@ -91,6 +100,6 @@
           vm.todos.push({ text: "新项目" });
         }, 3000);
       };
-    </script>
+    </script> -->
   </body>
 </html>

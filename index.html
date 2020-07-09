@@ -23,7 +23,7 @@
     <div id="app">
       <v-app>
         <v-app-bar app>
-          <v-toolbar-title>Vue & Vuetify 教程</v-toolbar-title>
+          <v-toolbar-title>Vue & Vuetify及其在NetSuite中的应用</v-toolbar-title>
         </v-app-bar>
 
         <v-main>
@@ -32,7 +32,7 @@
               <v-subheader>Vue</v-subheader>
               <v-list-item v-for="(item, i) in items" :key="i">
                 <v-list-item-content>
-                  <a :href="item.url">{{ item.text }}</a>
+                  <a :href="item.url" target="_blank">{{ item.text }} </a>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -42,7 +42,7 @@
             <v-list>
               <v-list-item v-for="(item, i) in items2" :key="i">
                 <v-list-item-content>
-                  <a :href="item.url">{{ item.text }}</a>
+                  <a :href="item.url" target="_blank">{{ item.text }}</a>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -62,7 +62,12 @@
         el: "#app",
         vuetify: new Vuetify(),
         data: () => ({
-          items: [{ text: "介绍", url: "./vue/introduction.html" }],
+          items: [{ text: "介绍", url: "./vue/01-introduction.html" },
+          {text: "数据绑定", url: "./vue/02-data-bind.html"},
+          {text: "计算属性与侦听属性", url: "./vue/03-computed_and_watch.html"},
+          {text: "生命周期钩子", url: "./vue/04-lifecycle_hooks.html"},
+          {text: "事件处理", url: "./vue/02-event_handling.html"}
+        ],
           items2: [{ text: "Application", url: "./vuetify/application.html" }],
         }),
       });

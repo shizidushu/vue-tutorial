@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script
+      src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>计算属性</h1>
+      <p>{{ fullName }}</p>
+      <hr>
+      <h1>侦听属性</h1>
+      <p>{{ fullName }}</p>
+    </div>
+
+    <script type="text/javascript">
+      var app = new Vue({
+        el: "#app",
+        data: {
+            firstName: 'Foo',
+            lastName: 'Bar'
+        },
+        computed: {
+            fullName: function () {
+            return this.firstName + ' ' + this.lastName
+            }
+        },
+        watch: {
+            firstName: function (val) {
+            this.fullName = val + ' ' + this.lastName
+            },
+            lastName: function (val) {
+            this.fullName = this.firstName + ' ' + val
+            }
+        }
+      });
+    </script>
+
+
+    <script>
+        // Vue似乎通过特殊的方法，使 `this` 指向 vm 实例
+        // 函数还可以作为某个对象的方法调用，这时this就指这个上级对象。
+        // http://www.ruanyifeng.com/blog/2010/04/using_this_keyword_in_javascript.html
+        let programming = {
+            R: 'cran',
+            Python: 'pip',
+            CSharp: 'NuGet',
+            howR: function () {
+                return this.R
+            }
+        }
+        console.log(programming.howR())
+    </script>
+  </body>
+</html>

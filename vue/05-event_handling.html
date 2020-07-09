@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="app">
+	<div id="example-1">
+        <button v-on:click="counter += 1"> 数值 :  {{ counter }} </button><br />
+        
+        <!-- 双击 -->
+		<button v-on:dblclick="greet($event)">Greet</button>
+	</div>
+</div>
+<script type="text/javascript">
+var vm = new Vue({
+	el : "#app",
+	data : {
+		counter: 0,
+		name : "vue"
+	},
+	methods: {
+	    greet: function (event) {
+	      // `this` 在方法里指向当前 Vue 实例
+	      alert('Hello ' + this.name + '!')
+	      // `event` 是原生 DOM 事件
+	      if (event) {
+	        alert(event.target.tagName)
+	      }
+	    }
+	  }
+});
+</script>
+<style type="text/css">
+
+</style>
+</body>
+</html>

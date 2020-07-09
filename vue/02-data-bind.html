@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script
+      src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 绑定一个 attribute -->
+      <img v-bind:src="imageSrc" width='40px' height= '40px'>
+
+      <hr>
+
+      <!-- 动态 attribute 名 (2.6.0+) -->
+      <button v-bind:[key]="true">Click me</button>
+
+      <hr>
+
+      <!-- 缩写 -->
+      <img :src="imageSrc" width='40px' height= '40px'>
+
+      <hr>
+
+      <!-- 动态 attribute 名缩写 (2.6.0+) -->
+      <button :[key]="true">Click me</button>
+
+      <hr>
+
+      <!-- 内联字符串拼接 -->
+      <img :src="'https://cn.vuejs.org/images/' + fileName" width='40px' height= '40px'>
+
+      <!-- class 绑定 -->
+      <div :class="{ red: isRed }"></div>
+      <div :class="[classA, classB]"></div>
+      <div :class="[classA, { classB: isB, classC: isC }]"></div>
+
+      <hr>
+      
+      <!-- style 绑定 -->
+      <p :style="{ fontSize: size + 'px' }">字体大小</p>
+
+      <hr>
+      <!-- 绑定一个全是 attribute 的对象 -->
+      <img v-bind="{ src: imageSrc, width: '50px', height: '50px', title: '绑定一个全是 attribute 的对象' }"></img>
+
+
+
+    </div>
+
+    <script type="text/javascript">
+      var app = new Vue({
+        el: "#app",
+        data: {
+          imageSrc: 'https://cn.vuejs.org/images/logo.png',
+          key: 'disabled',
+          fileName: 'logo.png',
+          isRed: true,
+          classA: "A",
+          classB: "B",
+          classC: "C",
+          isB: false,
+          isC: true,
+          size: 28,
+          text: "通过 prop 修饰符绑定 DOM attribute"
+        },
+      });
+    </script>
+  </body>
+</html>
