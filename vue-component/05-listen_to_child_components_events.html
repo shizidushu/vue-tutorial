@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+
+    
+<div id="app">
+    <p>组件：监听子组件事件</p>
+    <div :style="{ fontSize: postFontSize + 'em' }">
+        <!-- 父级组件可以像处理 native DOM 事件一样通过 v-on 监听子组件实例的任意事件： -->
+        <blog-post
+          v-on:enlarge-text="postFontSize += 0.1"
+          v-for="post in posts"
+          v-bind:key="post.id"
+          v-bind:post="post"
+        ></blog-post>
+    </div>
+</div>
+<script type="text/javascript">
+
+Vue.component('blog-post', {
+    props: ['post'],
+	template:  `
+            <div class="blog-post">
+            <h3>{{ post.title }}</h3>
+            <!-- 子组件可以通过调用内建的 $emit 方法并传入事件名称来触发一个事件 -->
+            <button v-on:click="$emit('enlarge-text')">
+                加大字体
+            </button>
+            <div v-html="post.content"></div>
+            </div>
+        `
+})
+var vm = new Vue({
+	el : "#app",
+	data: {
+        posts: [
+            { id: 1, title: 'My journey with Vue', content: `Uncertainty is the bane of operations. No matter in what form—for example, uncertain
+                                                        demand, uncertain supply, or uncertain quality—operational performance never benefits
+                                                        from the presence of uncertainty. Previous chapters have discussed models for coping with
+                                                        uncertainty (e.g., queuing, newsvendor, and order-up-to) and have emphasized the need to
+                                                        quantify uncertainty.`},
+            { id: 2, title: 'Blogging with Vue', content: `The newsvendor and the order-up-to inventory models are tools for deciding how much
+                                                        inventory to put at a single location to serve demand. An equally important decision, and
+                                                        one that we have ignored so far, is in how many different locations should the firm store
+                                                        inventory to serve demand.`},
+            { id: 3, title: 'Why Vue is so fun', content: `This discussion obviously leads to the question of why does location pooling reduce
+                                                        the required inventory investment? We’ll find a good answer by looking at how demand
+                                                        variability changes as locations are added to the pooled location. ` }
+        ],
+        postFontSize: 1
+    }
+});
+</script>
+<style type="text/css">
+
+</style>
+</body>
+</html>

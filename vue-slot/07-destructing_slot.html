@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="app">
+    <p>插槽：解构插槽Prop</p>
+
+    <current-user>
+        <!-- 作用域插槽的内部工作原理是将你的插槽内容包括在一个传入单个参数的函数里： -->
+        <!-- 这意味着 v-slot 的值实际上可以是任何能够作为函数定义中的参数的 JavaScript 表达式。 -->
+        <template v-slot:default="{ user }">
+          {{ user.firstName }}
+        </template>
+    </current-user>
+
+    <hr>
+
+    <current-user>
+        <!-- 作用域插槽的内部工作原理是将你的插槽内容包括在一个传入单个参数的函数里： -->
+        <!-- 这意味着 v-slot 的值实际上可以是任何能够作为函数定义中的参数的 JavaScript 表达式。 -->
+        <template v-slot:default="{ user: person }">
+            {{ person.firstName }}
+        </template>
+    </current-user>
+
+
+</div>
+<script type="text/javascript">
+
+Vue.component('current-user', {
+    data: function () {
+		return {
+            user: {firstName: 'Li', lastName: 'Xi'}
+		}
+	},
+	template: `
+    <span>
+        <slot v-bind:user="user">
+            {{ user.lastName }}
+        </slot>
+    </span>
+    `
+})
+var vm = new Vue({
+	el : "#app",
+    mounted: function() {
+        // 解构对象
+
+        // 无声明赋值
+        var o = {p: 42, q: true};
+        var {p, q} = o;
+
+        console.log(p); // 42
+        console.log(q); // true
+
+        // 可以从一个对象中提取变量并赋值给和对象属性名不同的新的变量名。
+        var o = {p: 42, q: true};
+        var {p: foo, q: bar} = o;
+        
+        console.log(foo); // 42 
+        console.log(bar); // true 
+
+
+        // *************************************************************
+
+
+        // 解构Prop
+        var componentSlotProps = {
+            user: {firstName: 'Li', lastName: 'Xi'}
+        }
+
+        // var { user } = componentSlotProps
+
+        function destructProp(slotProps) {
+            var code = 'var ' + slotProps + '= componentSlotProps'
+            eval(code)
+            console.log(user)
+        }
+        destructProp("{ user }")
+    }
+});
+</script>
+<style type="text/css">
+
+</style>
+</body>
+</html>

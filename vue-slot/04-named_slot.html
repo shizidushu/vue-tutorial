@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="app">
+    <p>插槽：具名插槽</p>
+
+    <base-layout>
+        <template v-slot:header>
+            <h1>Here might be a page title</h1>
+        </template>
+
+        <template v-slot:default>
+            <p>A paragraph for the main content.</p>
+            <p>And another one.</p>
+        </template>
+
+        <template v-slot:footer>
+            <p>Here's some contact info</p>
+        </template>
+    </base-layout>
+
+</div>
+<script type="text/javascript">
+
+Vue.component('base-layout', {
+    props: ['url'],
+	template: `
+    <div class="container">
+        <header>
+            <!-- 我们希望把页头放这里 -->
+            <slot name="header"></slot>
+        </header>
+        <main>
+            <!-- 我们希望把主要内容放这里 -->
+
+            <!-- 一个不带 name 的 <slot> 出口会带有隐含的名字“default”。 -->
+            <slot></slot>
+        </main>
+        <footer>
+            <!-- 我们希望把页脚放这里 -->
+            <slot name="footer"></slot>
+        </footer>
+    </div>
+    `
+})
+var vm = new Vue({
+	el : "#app",
+	data : {
+        link: "https://cn.vuejs.org/v2/guide/components-slots.html"
+    },
+});
+</script>
+<style type="text/css">
+
+</style>
+</body>
+</html>

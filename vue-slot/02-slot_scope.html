@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="app">
+    <p>插槽：编译作用域</p>
+    <b>父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。</b>
+
+    <hr>
+
+    <navigation-link :url="link">
+        <!-- 不可访问组件内部定义的url -->
+        Clicking here will send you to: {{ url }}
+    </navigation-link>
+
+    <hr>
+
+    <navigation-link :url="link">
+        <!-- 可以访问相同的实例property -->
+        <!-- 组件是可复用的 Vue 实例 -->
+        Clicking here will send you to: {{ link }}
+    </navigation-link>
+
+</div>
+<script type="text/javascript">
+
+Vue.component('navigation-link', {
+    props: ['url'],
+	template: `
+    <a
+    v-bind:href="url"
+    >
+        <slot></slot>
+    </a>
+    `
+})
+var vm = new Vue({
+	el : "#app",
+	data : {
+        link: "https://cn.vuejs.org/v2/guide/components-slots.html"
+    },
+});
+</script>
+<style type="text/css">
+
+</style>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="app">
+    <p>插槽：插槽内容</p>
+
+    <hr>
+
+    <navigation-link :url="link">
+        Vue 插槽
+    </navigation-link>
+
+    <hr>
+
+    <navigation-link url="https://cn.vuejs.org/v2/guide/components-slots.html">
+        Vue 插槽
+    </navigation-link>
+
+    <hr>
+
+</div>
+<script type="text/javascript">
+
+Vue.component('navigation-link', {
+    props: ['url'],
+	template: `
+    <a
+    v-bind:href="url"
+    >
+        <slot></slot>
+    </a>
+    `
+})
+var vm = new Vue({
+	el : "#app",
+	data : {
+        link: "https://cn.vuejs.org/v2/guide/components-slots.html"
+    },
+});
+</script>
+<style type="text/css">
+
+</style>
+</body>
+</html>
