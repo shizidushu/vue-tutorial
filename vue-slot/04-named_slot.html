@@ -14,6 +14,11 @@
             <h1>Here might be a page title</h1>
         </template>
 
+        <!-- header.subheader 是插槽的名称 -->
+        <template v-slot:header.subheader>
+            <h2>这是副标题</h2>
+        </template>
+
         <template v-slot:default>
             <p>A paragraph for the main content.</p>
             <p>And another one.</p>
@@ -34,6 +39,7 @@ Vue.component('base-layout', {
         <header>
             <!-- 我们希望把页头放这里 -->
             <slot name="header"></slot>
+            <slot name="header.subheader"></slot>
         </header>
         <main>
             <!-- 我们希望把主要内容放这里 -->

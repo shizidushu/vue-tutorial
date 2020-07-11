@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="app">
+    <p>实例属性: attrs</p>
+	<custom-input v-bind="inputAttrs"></custom-input>
+</div>
+<script type="text/javascript">
+
+Vue.component('custom-input', {
+    template: `
+    <div>
+        <input v-bind='$attrs'></input>
+    </div>
+    `
+})
+var vm = new Vue({
+	el : "#app",
+	data : {
+        inputAttrs: {
+            type: 'text',
+            placeholder: '请输入。。。'
+        }
+    },
+});
+</script>
+<style type="text/css">
+
+</style>
+</body>
+</html>
