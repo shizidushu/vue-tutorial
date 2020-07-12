@@ -25,6 +25,8 @@
       <h2>条件与循环</h2>
 
       <p v-if="seen">现在你可以看到我，3秒后就看不到了</p>
+      <!-- v-else -->
+      <p v-else>3秒前你看不到我，现在可以看到了</p>
 
       <hr />
 
@@ -80,6 +82,7 @@
           },
         },
         mounted: function() {
+          // vm = this
           setTimeout(function () {
           var el = document.getElementById("app");
           var vm = el.__vue__;
@@ -90,16 +93,5 @@
         }
       });
     </script>
-    <!-- <script>
-      window.onload = function () {
-        setTimeout(function () {
-          var el = document.getElementById("app");
-          var vm = el.__vue__;
-          vm.seen = false;
-
-          vm.todos.push({ text: "新项目" });
-        }, 3000);
-      };
-    </script> -->
   </body>
 </html>
