@@ -12,14 +12,22 @@
         v-for="post in posts"
         v-bind:key="post.id"
         v-bind:post="post"
+        v-bind:count="count"
+        v-bind:increase="increaseCount"
     ></blog-post>
 </div>
 <script type="text/javascript">
 
 Vue.component('blog-post', {
-    props: ['post'],
+    // 通常你希望每个 prop 都有指定的值类型。这时，你可以以对象形式列出 prop，这些 property 的名称和值分别是 prop 各自的名称和类型：
+    props: {
+        post: Object,
+        count: Number,
+        increase: Function
+    },
 	template:  `
             <div class="blog-post">
+            <button v-on:click="increase">你已点击 {{ count }} times.</button>
             <h3>{{ post.title }}</h3>
             <div v-html="post.content"></div>
             </div>
@@ -28,6 +36,7 @@ Vue.component('blog-post', {
 var vm = new Vue({
 	el : "#app",
 	data: {
+        count: 0,
         posts: [
             { id: 1, title: 'My journey with Vue', content: `Uncertainty is the bane of operations. No matter in what form—for example, uncertain
                                                         demand, uncertain supply, or uncertain quality—operational performance never benefits
@@ -42,6 +51,11 @@ var vm = new Vue({
                                                         the required inventory investment? We’ll find a good answer by looking at how demand
                                                         variability changes as locations are added to the pooled location. ` }
         ]
+    },
+    methods: {
+        increaseCount: function() {
+            return this.count++
+        }
     }
 });
 </script>
